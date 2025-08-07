@@ -1,256 +1,166 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Pesquisa de Satisfação</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário de Avaliação</title>
   <style>
     body {
-      background: #111;
-      color: #eee;
       font-family: Arial, sans-serif;
+      background: #f4f4f4;
       padding: 20px;
-    }
-    img {
-      display: block;
-      margin: 0 auto;
-      max-height: 80px;
     }
     h1 {
       text-align: center;
-      margin-bottom: 30px;
     }
     form {
       max-width: 600px;
-      margin: 0 auto;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    .question {
-      margin-bottom: 20px;
-    }
-    .question label {
+    label {
       display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
+      margin-top: 15px;
     }
-    input[type="text"], select, textarea {
+    input, select, textarea {
       width: 100%;
       padding: 10px;
-      background: #222;
-      border: 1px solid #555;
-      color: #eee;
+      margin-top: 5px;
+      border: 1px solid #ccc;
       border-radius: 4px;
-      margin-bottom: 10px;
-    }
-    input[type="radio"] {
-      margin-right: 6px;
-    }
-    .options label {
-      display: block;
-      margin: 4px 0;
-    }
-    .justify {
-      display: none;
-      margin-top: 10px;
     }
     button {
-      width: 100%;
-      background: #28a745;
-      color: #fff;
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
       border: none;
-      padding: 15px;
-      border-radius: 4px;
-      cursor: pointer;
+      padding: 12px 20px;
       font-size: 16px;
-      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
     }
     button:hover {
-      background: #218838;
-    }
-    #status {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 16px;
-    }
-    .success {
-      color: #0f0;
-    }
-    .error {
-      color: #f33;
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
 
-<img src="https://static.wixstatic.com/media/d830b0_883ba5848c5149d480f3957327c6f776~mv2.png" alt="Logo Delícia Gourmet">
-<h1>Pesquisa de Satisfação</h1>
+  <h1>Formulário de Avaliação</h1>
 
-<form id="pesquisaForm">
+  <form id="formulario">
+    <input type="hidden" name="empresa" value="MERCATTO DELÍCIA">
 
-  <div class="question">
-    <label>Nome e sobrenome *</label>
-    <input type="text" name="nome" required>
-  </div>
+    <label>Nome e Sobrenome:
+      <input type="text" name="nome" required>
+    </label>
 
-  <div class="question">
-    <label>Qual a data de seu aniversário?</label>
-    <div style="display: flex; gap: 10px;">
-      <input type="text" name="dia" placeholder="Dia" style="flex:1;">
-      <select name="mes" style="flex:2;">
-        <option value="">Mês</option>
-        <option>Janeiro</option><option>Fevereiro</option><option>Março</option><option>Abril</option>
-        <option>Maio</option><option>Junho</option><option>Julho</option><option>Agosto</option>
-        <option>Setembro</option><option>Outubro</option><option>Novembro</option><option>Dezembro</option>
+    <label>Data de Aniversário:
+      <input type="date" name="aniversario">
+    </label>
+
+    <label>Telefone:
+      <input type="tel" name="telefone">
+    </label>
+
+    <label>Cidade:
+      <input type="text" name="cidade">
+    </label>
+
+    <label>O que achou do nosso ambiente?
+      <select name="ambiente">
+        <option value="Ruim">Ruim</option>
+        <option value="Bom">Bom</option>
+        <option value="Ótimo">Ótimo</option>
       </select>
-      <input type="text" name="ano" placeholder="Ano" style="flex:1;">
-    </div>
-  </div>
+    </label>
 
-  <div class="question">
-    <label>Telefone</label>
-    <input type="text" name="telefone">
-  </div>
+    <label>O que achou da iluminação?
+      <select name="iluminacao">
+        <option value="Ruim">Ruim</option>
+        <option value="Bom">Bom</option>
+        <option value="Ótimo">Ótimo</option>
+      </select>
+    </label>
 
-  <div class="question">
-    <label>Em qual cidade mora? *</label>
-    <div class="options">
-      <label><input type="radio" name="cidade" value="Barreiras-BA" onclick="toggleOutra()"> Barreiras-BA</label>
-      <label><input type="radio" name="cidade" value="Luis Eduardo Magalhães-BA" onclick="toggleOutra()"> Luis Eduardo Magalhães-BA</label>
-      <label><input type="radio" name="cidade" value="Outra" onclick="toggleOutra()"> Outra</label>
-    </div>
-    <div id="outra-cidade" style="display:none;">
-      <input type="text" name="cidade_outra" placeholder="Qual cidade?">
-    </div>
-  </div>
+    <label>Como estava a comida?
+      <select name="comida">
+        <option value="Ruim">Ruim</option>
+        <option value="Bom">Bom</option>
+        <option value="Ótimo">Ótimo</option>
+      </select>
+    </label>
 
-  <div class="question">
-    <label>O que achou do nosso ambiente?</label>
-    <div class="options">
-      <label><input type="radio" name="ambiente" value="Ótimo" onclick="toggleJustify(this)"> Ótimo</label>
-      <label><input type="radio" name="ambiente" value="Bom" onclick="toggleJustify(this)"> Bom</label>
-      <label><input type="radio" name="ambiente" value="Ruim" onclick="toggleJustify(this)"> Ruim</label>
-    </div>
-    <div class="justify" id="ambiente-justify">
-      <textarea name="ambiente_justificativa" placeholder="Descreva o motivo"></textarea>
-    </div>
-  </div>
+    <label>Como estava a música?
+      <select name="musica">
+        <option value="Ruim">Ruim</option>
+        <option value="Bom">Bom</option>
+        <option value="Ótimo">Ótimo</option>
+      </select>
+    </label>
 
-  <div class="question">
-    <label>O que achou da iluminação?</label>
-    <div class="options">
-      <label><input type="radio" name="iluminacao" value="Ótimo" onclick="toggleJustify(this)"> Ótimo</label>
-      <label><input type="radio" name="iluminacao" value="Bom" onclick="toggleJustify(this)"> Bom</label>
-      <label><input type="radio" name="iluminacao" value="Ruim" onclick="toggleJustify(this)"> Ruim</label>
-    </div>
-    <div class="justify" id="iluminacao-justify">
-      <textarea name="iluminacao_justificativa" placeholder="Descreva o motivo"></textarea>
-    </div>
-  </div>
+    <label>Qual seu estilo musical?
+      <input type="text" name="estilo">
+    </label>
 
-  <div class="question">
-    <label>Como estava a comida?</label>
-    <div class="options">
-      <label><input type="radio" name="comida" value="Ótima" onclick="toggleJustify(this)"> Ótima</label>
-      <label><input type="radio" name="comida" value="Boa" onclick="toggleJustify(this)"> Boa</label>
-      <label><input type="radio" name="comida" value="Ruim" onclick="toggleJustify(this)"> Ruim</label>
-    </div>
-    <div class="justify" id="comida-justify">
-      <textarea name="comida_justificativa" placeholder="Descreva o motivo"></textarea>
-    </div>
-  </div>
+    <label>Como avalia o atendimento recebido?
+      <select name="atendimento">
+        <option value="Ruim">Ruim</option>
+        <option value="Bom">Bom</option>
+        <option value="Ótimo">Ótimo</option>
+      </select>
+    </label>
 
-  <div class="question">
-    <label>Como avalia o atendimento recebido?</label>
-    <div class="options">
-      <label><input type="radio" name="atendimento" value="Ótimo" onclick="toggleJustify(this)"> Ótimo</label>
-      <label><input type="radio" name="atendimento" value="Bom" onclick="toggleJustify(this)"> Bom</label>
-      <label><input type="radio" name="atendimento" value="Ruim" onclick="toggleJustify(this)"> Ruim</label>
-    </div>
-    <div class="justify" id="atendimento-justify">
-      <textarea name="atendimento_justificativa" placeholder="Descreva o motivo"></textarea>
-    </div>
-  </div>
+    <label>O que achou da climatização?
+      <select name="climatizacao">
+        <option value="Ruim">Ruim</option>
+        <option value="Bom">Bom</option>
+        <option value="Ótimo"> Ótimo</option>
+      </select>
+    </label>
 
-  <div class="question">
-    <label>O que achou da climatização?</label>
-    <div class="options">
-      <label><input type="radio" name="climatizacao" value="Ótima" onclick="toggleJustify(this)"> Ótima</label>
-      <label><input type="radio" name="climatizacao" value="Boa" onclick="toggleJustify(this)"> Boa</label>
-      <label><input type="radio" name="climatizacao" value="Ruim" onclick="toggleJustify(this)"> Ruim</label>
-    </div>
-    <div class="justify" id="climatizacao-justify">
-      <textarea name="climatizacao_justificativa" placeholder="Descreva o motivo"></textarea>
-    </div>
-  </div>
+    <label>O que achou das bebidas?
+      <select name="bebidas">
+        <option value="Ruim">Ruim</option>
+        <option value="Bom">Bom</option>
+        <option value="Ótimo"> Ótimo</option>
+      </select>
+    </label>
 
-  <div class="question">
-    <label>O que gostaria que fosse adicionado ao cardápio?</label>
-    <input type="text" name="cardapio_sugestao">
-  </div>
+    <label>Deixe uma sugestão:
+      <textarea name="sugestao" rows="3"></textarea>
+    </label>
 
-  <button type="submit">Enviar Resposta</button>
-  <div id="status"></div>
+    <button type="submit">Enviar Avaliação</button>
+  </form>
 
-</form>
+  <script>
+    document.getElementById('formulario').addEventListener('submit', async function(e) {
+      e.preventDefault();
 
-<script>
-function toggleOutra() {
-  const outra = document.querySelector('input[name="cidade"][value="Outra"]').checked;
-  document.getElementById('outra-cidade').style.display = outra ? 'block' : 'none';
-}
+      const dados = new FormData(this);
+      const obj = {};
+      dados.forEach((v, k) => obj[k] = v);
 
-function toggleJustify(input) {
-  const question = input.name;
-  const justifyDiv = document.getElementById(`${question}-justify`);
-  if (input.value.toLowerCase() === "ruim") {
-    justifyDiv.style.display = "block";
-  } else {
-    justifyDiv.style.display = "none";
-    justifyDiv.querySelector("textarea").value = "";
-  }
-}
+      const url = 'https://script.google.com/macros/s/AKfycbxSuaURL-do-seu-AppScript/exec';
 
-document.getElementById('pesquisaForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+      const res = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(obj),
+        headers: { 'Content-Type': 'application/json' }
+      });
 
-  const data = {
-    nome: document.querySelector('[name="nome"]').value,
-    aniversario: document.querySelector('[name="dia"]').value + "/" +
-                  document.querySelector('[name="mes"]').value + "/" +
-                  document.querySelector('[name="ano"]').value,
-    telefone: document.querySelector('[name="telefone"]').value,
-    cidade: document.querySelector('input[name="cidade"]:checked')?.value === "Outra"
-            ? document.querySelector('[name="cidade_outra"]').value
-            : document.querySelector('input[name="cidade"]:checked')?.value || '',
-    ambiente: document.querySelector('input[name="ambiente"]:checked')?.value || '',
-    ambiente_justificativa: document.querySelector('[name="ambiente_justificativa"]').value || '',
-    iluminacao: document.querySelector('input[name="iluminacao"]:checked')?.value || '',
-    iluminacao_justificativa: document.querySelector('[name="iluminacao_justificativa"]').value || '',
-    comida: document.querySelector('input[name="comida"]:checked')?.value || '',
-    comida_justificativa: document.querySelector('[name="comida_justificativa"]').value || '',
-    atendimento: document.querySelector('input[name="atendimento"]:checked')?.value || '',
-    atendimento_justificativa: document.querySelector('[name="atendimento_justificativa"]').value || '',
-    climatizacao: document.querySelector('input[name="climatizacao"]:checked')?.value || '',
-    climatizacao_justificativa: document.querySelector('[name="climatizacao_justificativa"]').value || '',
-    cardapio_sugestao: document.querySelector('[name="cardapio_sugestao"]').value || ''
-  };
-
-  fetch("https://script.google.com/macros/s/AKfycbwoq1-KXaIw2Ncpm2xDMRT73x_vPpFWu7nCDQ3wM55mkliVx5FISJLlgDOvElY5pS-B/exec", {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json" }
-  })
-  .then(r => r.text())
-  .then(() => {
-    document.getElementById('status').innerHTML = "<p class='success'>✅ Obrigado! Resposta enviada com sucesso.</p>";
-    document.getElementById('pesquisaForm').reset();
-    document.querySelectorAll('.justify').forEach(j => j.style.display = 'none');
-    document.getElementById('outra-cidade').style.display = 'none';
-  })
-  .catch(err => {
-    document.getElementById('status').innerHTML = "<p class='error'>❌ Erro: " + err + "</p>";
-  });
-});
-</script>
+      if (res.ok) {
+        alert('Avaliação enviada com sucesso!');
+        this.reset();
+      } else {
+        alert('Erro ao enviar. Tente novamente.');
+      }
+    });
+  </script>
 
 </body>
 </html>
